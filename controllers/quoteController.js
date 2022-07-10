@@ -51,7 +51,6 @@ const getQuoteById = async(req,res)=>{
 const updateQuoteById = async(req,res)=>{
     try{
         const id =req.params.id
-        
         const quote= await prisma.quote.update({
             where:{
                 id:Number(id)
