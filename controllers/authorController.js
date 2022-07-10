@@ -1,5 +1,6 @@
 //importing prisma
 const {PrismaClient} = require('@prisma/client');
+const { message } = require('../helpers/joi-schemas');
 //instance of prisma client
 const prisma = new PrismaClient();
 
@@ -8,15 +9,13 @@ const prisma = new PrismaClient();
 //Route handler  and request handler
 const getAllAuthors = async(req,res)=>{
     try{
-        const {id,name} =req.body
-        const authors = await prisma.quote.findMany({
-            data:{id,name}
+        const authors = await prisma.author.findMany({
+            include:{quotes:true}
         })
         res.status(200).json({message:"Authors have been found.",author:authors})
     }catch(error){
         res.status(500).json({error:error.message})
     }
-
 }
 
 const createAuthor = async(req,res)=>{
@@ -40,9 +39,9 @@ const getAuthorById = async(req,res)=>{
                 where:{
                     id:Number(id)
                 },
-                include:{author:true}
+                include:{quotes:true}
             })
-            res.status(200).json(quote)
+            res.status(200).json(author)
         }else{
             res.status(404).json(`Quote with id ${id} not found`)
         }   
@@ -54,15 +53,13 @@ const getAuthorById = async(req,res)=>{
 const updateAuthorById = async(req,res)=>{
     try{
         const id =req.params.id
-        const {name,quotes} =req.body
-        
         const author= await prisma.author.update({
             where:{
                 id:Number(id)
             },
-            include:{author:true}
+            data:req.body
         })
-        if(quote){   
+        if(author){   
             res.status(200).json({message:"Author has been updated.",author})
         }else{
             res.status(404).json(`Author with id ${id} not found`)
@@ -79,9 +76,9 @@ const deleteAuthorById = async(req,res)=>{
             where:{
                 id:Number(id)
             },
-            include:{author:true}
+            // include:{author:true}
         })
-        if(quote){   
+        if(author){   
             res.status(200).json({message:"Author has been deleted."})
         }else{
             res.status(404).json(`Author with id ${id} not found`)

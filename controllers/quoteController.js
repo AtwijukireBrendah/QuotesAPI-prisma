@@ -1,5 +1,6 @@
 //importing prisma
 const {PrismaClient} = require('@prisma/client');
+const { request } = require('express');
 //instance of prisma client
 const prisma = new PrismaClient();
 
@@ -50,13 +51,12 @@ const getQuoteById = async(req,res)=>{
 const updateQuoteById = async(req,res)=>{
     try{
         const id =req.params.id
-        const {text,authorId} =req.body
         
         const quote= await prisma.quote.update({
             where:{
                 id:Number(id)
             },
-            include:{author:true}
+            data:req.body
         })
         if(quote){   
             res.status(200).json({message:"Quote has been updated.",quote})

@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+//import quote schema
+const quoteSchema =require('../helpers/joi-schemas');
+const validateData = require('../helpers/validation');
+
 //Import Controllers
 const {
     getAllQuotes,
@@ -9,15 +13,15 @@ const {
     updateQuoteById,
     deleteQuoteById} = require('../controllers/quoteController');
 
-router.get("/",getAllQuotes)
+router.get("/",getAllQuotes);
 
-router.post("/",createQuote)
+router.post("/",validateData(quoteSchema), createQuote);
 
-router.get("/:id",getQuoteById)
+router.get("/:id",getQuoteById);
 
-router.patch("/:id",updateQuoteById)
+router.patch("/:id",updateQuoteById);
 
-router.delete("/:id",deleteQuoteById)
+router.delete("/:id",deleteQuoteById);
 
 
 module.exports = router;
