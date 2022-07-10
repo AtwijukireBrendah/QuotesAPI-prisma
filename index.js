@@ -5,7 +5,6 @@ const app = express();
 const quoteRouter = require('./routes/quoteRouter');
 const authorRouter = require('./routes/authorRouter');
 
-
 //Middleware
 app.use(express.json());
 
