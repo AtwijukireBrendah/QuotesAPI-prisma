@@ -12,9 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 //Route Handlers
-app.use("/quotes",quoteRouter);
-app.use("/authors",authorRouter);
-app.use("/users",userRouter);
+app.use("/api/v1/quotes",quoteRouter);
+app.use("/api/v1/authors",authorRouter);
+app.use("/api/v1/users",userRouter);
 
 const PORT = process.env.PORT || 5009;
 app.listen(PORT,()=>{

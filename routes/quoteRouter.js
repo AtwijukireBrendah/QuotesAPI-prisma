@@ -13,9 +13,11 @@ const {
     updateQuoteById,
     deleteQuoteById} = require('../controllers/quoteController');
 
+const authenticate = require('../helpers/authenticate');
+
 router.get("/",getAllQuotes);
 
-router.post("/",validateData(quoteSchema), createQuote);
+router.post("/",[authenticate,validateData(quoteSchema)], createQuote);
 
 router.get("/:id",getQuoteById);
 
