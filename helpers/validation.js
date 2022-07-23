@@ -15,5 +15,4 @@ const validateData =(schema)=>{
     )
 }
 
-
 module.exports = validateData;
