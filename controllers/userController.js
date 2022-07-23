@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 //importing JWT
 const JWT = require('jsonwebtoken');
 
+
 // USERS CRUD
 //Route handler  and request handler
 const getAllUsers = async(req,res)=>{
