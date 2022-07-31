@@ -11,3 +11,10 @@ test('Should create a new user',async()=>{
         password: '188832009'
     }).expect(200)
 })
+
+
+test('Should not create a new user without a username',async()=>{
+    await request(app).post('/api/v1/users').send({
+        password: '1888320095'
+    }).expect(500)
+})
