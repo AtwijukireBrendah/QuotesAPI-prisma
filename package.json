@@ -6,7 +6,6 @@
     "test": "jest",
     "start": "nodemon index.js",
     "db-migrate": "npx prisma migrate deploy"
-
   },
   "author": "Brenda",
   "license": "ISC",
