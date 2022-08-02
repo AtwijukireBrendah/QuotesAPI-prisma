@@ -12,6 +12,12 @@ app.use(express.json());
 app.use(cors());
 
 //Route Handlers
+app.get('/api/v1/', (req, res)=>{
+    res.status(200).json({
+        status:200, 
+        message:"API working fine"
+    })
+});
 app.use("/api/v1/quotes",quoteRouter);
 app.use("/api/v1/authors",authorRouter);
 app.use("/api/v1/users",userRouter);
