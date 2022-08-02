@@ -22,7 +22,6 @@ app.get('/api/v1/', (req, res)=>{
 app.get('/api/v1/quotes', (req, res)=>{
     res.status(200).json(quotes)
 });
-// res.status(200).json(quotes)
 
 app.use("/api/v1/quotes",quoteRouter);
 app.use("/api/v1/authors",authorRouter);
